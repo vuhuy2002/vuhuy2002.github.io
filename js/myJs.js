@@ -6,7 +6,7 @@ const textConfig = {
   text5: "",
   text6: "",
   text7: "",
-  text8: "Chúc mừng bạn Bu nhận được một nụ hôn chụt chụt từ bạn Huy!!! Trước khi nhận quà có mún nói gì hem",
+  text8: "Chúc mừng bạn Bu nhận được một nụ hôn chụt chụt từ bạn Huy!!!",
   text9: "Cảm ơn anh iu <3 !",
   text10: "Moa moa",
   text11:"Chụt Chụt",
@@ -153,7 +153,7 @@ $(document).ready(function () {
       html: true,
       width: 900,
       padding: "3em",
-      html: "<input type='text' class='form-control' id='txtReason'  placeholder='Gửi gắm lời iu thuông'>",
+      html: "<input type='text' class='form-control' id='txtReason'  placeholder='Gửi gắm lời iu thuông trước khi nhận quà'>",
       background: '#fff url("img/aaaa.png")',
       backdrop: `
                     rgba(0,0,123,0.4)
@@ -177,7 +177,7 @@ $(document).ready(function () {
           text: textConfig.text11,
           confirmButtonColor: "#83d0c9",
           onClose: () => {
-            window.location = "https://www.facebook.com/messenger";
+            window.location = "https://www.facebook.com/messages";
           },
         });
       }
