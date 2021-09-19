@@ -9,6 +9,7 @@
 	z-index:9999999; /* makes sure it stays on top */
 }
 
+
 .spinner {
 	position:absolute;
 	left:50%; /* centers the loading animation horizontally one the screen */
@@ -21,7 +22,7 @@
 }
 
 .spinner > div {
-	background-color: #fff;
+	background-color:rgb(231, 195, 228);
 	height: 100%;
 	width: 6px;
 	display: inline-block; 

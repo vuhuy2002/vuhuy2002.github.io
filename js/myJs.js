@@ -1,58 +1,195 @@
-console.clear();
-var _data = JSON.parse(`{"lyrics":[{"line":"","time":-1},{"line":"Hey, let's all go into the forest","note":"Verse 1","time":16000},{"line":"Nobody will notice for a while","time":20000},{"line":"There we can visit all the creatures","time":24000},{"line":"Maybe they can teach us facts of life","time":27500},{"line":"","time":32000},{"line":"Or we can travel to the ocean","note":"Verse 2","time":55500},{"line":"Don't forget your lotion","time":59500},{"line":"It's quite hot","time":61500},{"line":"I once met seven lovely crabs","time":64000},{"line":"They said I should go back and join them for tea","time":67500},{"line":"","time":72000},{"line":"Oh wait, the forest got demolished","note":"Verse 3","time":95500},{"line":"When they built the airport years ago","time":99000},{"line":"But we can still go see the ocean","time":103500},{"line":"Cause they put it in a bowl at the mall","time":107500},{"line":"","time":112000}]}`);
-var currentLine = "";
+const textConfig = {
+  text1: "Helu Bu chúm chim!",
+  text2: "Quà nè :v",
+  text3: "Lựa 1 cái thoai !!!",
+  text4: "",
+  text5: "",
+  text6: "",
+  text7: "",
+  text8: "Chúc mừng bạn Bu nhận được một nụ hôn chụt chụt từ bạn Huy!!! Trước khi nhận quà có mún nói gì hem",
+  text9: "Cảm ơn anh iu <3 !",
+  text10: "Moa moa",
+  text11:"Chụt Chụt",
+  text12: "Hun lại",
+  text13:"Nhận quà ",
+};
 
-function align() {
-   var a = $(".highlighted").height();
-   var c = $(".content").height();
-   var d = $(".highlighted").offset().top - $(".highlighted").parent().offset().top;
-   var e = d + (a/2) - (c/2);
-   $(".content").animate(
-       {scrollTop: e + "px"}, {easing: "swing", duration: 250}
-   );
-}
+$(document).ready(function () {
+  // process bar
+  setTimeout(function () {
+    firstQuestion();
+    $(".spinner").fadeOut();
+    $("#preloader").delay(350).fadeOut("slow");
+    $("body").delay(350).css({
+      overflow: "visible",
+    });
+  }, 600);
 
-var lyricHeight = $(".lyrics").height();
-$(window).on("resize", function() {
-   if ($(".lyrics").height() != lyricHeight) { //Either width changes so that a line may take up or use less vertical space or the window height changes, 2 in 1
-      lyricHeight = $(".lyrics").height();
-      align();
-   }
-});
+  $("#text3").html(textConfig.text3);
+  $("#text4").html(textConfig.text4);
+  $("#no").html(textConfig.text5);
+  $("#yes").html(textConfig.text6);
+  $("#no2").html(textConfig.text7);
 
-$(document).ready(function(){
-   $("video").on('timeupdate', function(e){
-      var time = this.currentTime*1000;
-      var past = _data["lyrics"].filter(function (item) {
-         return item.time < time;
+  function firstQuestion() {
+    $(".content").hide();
+    Swal.fire({
+      title: textConfig.text1,
+      text: textConfig.text2,
+      imageUrl: "img/cuteCat.jpg",
+      imageWidth: 300,
+      imageHeight: 300,
+      background: '#fff url("img/aaaa.png")',
+      imageAlt: "Custom image",
+       
+    }).then(function () {
+      $(".content").show(200).css();
+    });
+  }
+
+  // switch button position
+  function switchButton() {
+    var audio = new Audio("sound/duck.mp3");
+    audio.play();
+    var leftNo = $("#no").css("left");
+    var topNO = $("#no").css("top");
+    var leftY = $("#yes").css("left");
+    var topY = $("#yes").css("top");
+    $("#no").css("left", leftY);
+    $("#no").css("top", topY);
+    $("#yes").css("left", leftNo);
+    $("#yes").css("top", topNO);
+  }
+  function doiChu() {
+    var audio = new Audio("sound/duck.mp3");
+    audio.play();
+    var leftNo = $("#no2").css("left");
+    var topNO = $("#no2").css("top");
+    var leftY = $("#yes").css("left");
+    var topY = $("#yes").css("top");
+    $("#no2").css("left", leftY);
+    $("#no2").css("top", topY);
+    $("#yes").css("left", leftNo);
+    $("#yes").css("top", topNO);
+  }
+  // move random button póition
+  function moveButton() {
+    var audio = new Audio("sound/Swish1.mp3");
+    audio.play();
+    if (screen.width <= 600) {
+      var x = Math.random() * 300;
+      var y = Math.random() * 500;
+    } else {
+      var x = Math.random() * 500;
+      var y = Math.random() * 500;
+    }
+    var left = x + "px";
+    var top = y + "px";
+    $("#no").css("left", left);
+    $("#no").css("top", top);
+  }
+
+  var n = 0;
+  $("#no").mousemove(function () {
+    if (n < 1) switchButton();
+    if (n > 1) moveButton();
+    n++;
+  });
+  $("#no").click(() => {
+    if (screen.width >= 900) switchButton();
+  });
+  function dichuyen() {
+    var audio = new Audio("sound/Swish1.mp3");
+    audio.play();
+    if (screen.width <= 600) {
+      var x = Math.random() * 300;
+      var y = Math.random() * 500;
+    } else {
+      var x = Math.random() * 500;
+      var y = Math.random() * 500;
+    }
+    var left = x + "px";
+    var top = y + "px";
+    $("#no2").css("left", left);
+    $("#no2").css("top", top);
+  }
+
+  var n2 = 0;
+  $("#no2").mousemove(function () {
+    if (n2 < 1) doiChu();
+    if (n2 > 1) dichuyen();
+    n2++;
+  });
+  $("#no").click(() => {
+    if (screen.width >= 900) doiChu();
+  });
+
+  // generate text in input
+  function textGenerate() {
+    var n = "";
+    var text = " " + textConfig.text9;
+    var a = Array.from(text);
+    var textVal = $("#txtReason").val() ? $("#txtReason").val() : "";
+    var count = textVal.length;
+    if (count > 0) {
+      for (let i = 1; i <= count; i++) {
+        n = n + a[i];
+        if (i == text.length + 1) {
+          $("#txtReason").val("");
+          n = "";
+          break;
+        }
+      }
+    }
+    $("#txtReason").val(n);
+  }
+
+  // show popup
+  $("#yes").click(function () {
+    var audio = new Audio("sound/tick.mp3");
+    audio.play();
+    Swal.fire({
+      title: textConfig.text8,
+      html: true,
+      width: 900,
+      padding: "3em",
+      html: "<input type='text' class='form-control' id='txtReason'  placeholder='Gửi gắm lời iu thuông'>",
+      background: '#fff url("img/aaaa.png")',
+      backdrop: `
+                    rgba(0,0,123,0.4)
+                    url("img/abcde.gif")
+                    left top
+                    no-repeat
+                  `,
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonColor: "#fe8a71",
+      cancelButtonColor: "#f6cd61",
+      confirmButtonText: textConfig.text13,
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire({
+          width: 900,
+          confirmButtonText: textConfig.text12,
+          background: 'white',
+          title: textConfig.text10,
+          text: textConfig.text11,
+          confirmButtonColor: "#83d0c9",
+          onClose: () => {
+            window.location = "https://www.facebook.com/messenger";
+          },
+        });
+      }
+    });
+
+    $("#txtReason").focus(function () {
+      var handleWriteText = setInterval(function () {
+        textGenerate();
+      }, 10);
+      $("#txtReason").blur(function () {
+        clearInterval(handleWriteText);
       });
-      if (_data["lyrics"][past.length] != currentLine) {
-         currentLine = _data["lyrics"][past.length];
-         $(".lyrics div").removeClass("highlighted");
-         $(`.lyrics div:nth-child(${past.length})`).addClass("highlighted"); //Text might take up more lines, do before realigning
-         align();
-      }
-   });
+    });
+  });
 });
-
-generate();
-
-function generate() 
-{
-   var html = "";
-   for(var i = 0; i < _data["lyrics"].length; i++) {
-      html += "<div";
-      if(i == 0) {
-         html+=` class="highlighted"`;
-         currentLine = 0;
-      }
-      if(_data["lyrics"][i]["note"]) {
-         html += ` note="${_data["lyrics"][i]["note"]}"`;
-      }
-      html += ">";
-      html += _data["lyrics"][i]["line"] == "" ? "•" : _data["lyrics"][i]["line"];
-      html += "</div>"
-   }
-   $(".lyrics").html(html);
-   align();
-}
