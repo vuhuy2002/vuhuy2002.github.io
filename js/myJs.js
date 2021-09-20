@@ -6,12 +6,12 @@ const textConfig = {
   text5: "",
   text6: "",
   text7: "",
-  text8: "Chúc mừng bạn Bu nhận được một nụ hôn chụt chụt từ bạn Huy!!!",
+  text8: "Chúc mừng bạn Bu nhận được một nụ hôn chụt chụt và 1 combo đồ ăn từ bạn Huy!!!",
   text9: "Cảm ơn anh iu <3 !",
   text10: "Moa moa",
   text11:"Chụt Chụt",
-  text12: "Hun lại",
-  text13:"Nhận quà ",
+  text12: "Nhận quà",
+  text13:"Gửi",
 };
 
 $(document).ready(function () {
