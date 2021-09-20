@@ -1,6 +1,6 @@
 const textConfig = {
   text1: "Helu Bu chúm chim!",
-  text2: "Quà nè :v",
+  text2: "Nhấn 'OK' để nhận quà nè :v",
   text3: "Lựa 1 cái thoai !!!",
   text4: "",
   text5: "",
